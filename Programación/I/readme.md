@@ -1,6 +1,4 @@
-#Carrera: Ingenería en Sistemas Computacionales
-#Periodo: 2022-2
-#Curso: BIS03 - Programación I para TI
-#Modalidad: Presencial
-#Nota: 100
-#Profesor: Johan Alberto Figueroa Guevara
+# BIS03 - Programación I para TI
+- Periodo: 2022-2
+- Modalidad: Presencial
+- Profesor: [Johan Alberto Figueroa Guevara](https://cr.linkedin.com/in/johan-figueroa-guevara-8a45b777/)
