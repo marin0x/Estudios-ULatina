@@ -56,8 +56,14 @@ public class Base extends javax.swing.JFrame implements MouseListener {
         menuInicio = new javax.swing.JPanel();
         iconoCasa = new javax.swing.JLabel();
         menuInicioText = new javax.swing.JLabel();
+        menuCrédito = new javax.swing.JPanel();
+        iconoMoneda = new javax.swing.JLabel();
+        menuCréditoTexto = new javax.swing.JLabel();
         encabezado = new javax.swing.JPanel();
         encabezadoContenedor = new javax.swing.JPanel();
+        programaNombre1 = new javax.swing.JLabel();
+        programaEncabezado1 = new javax.swing.JLabel();
+        programaNombre2 = new javax.swing.JLabel();
         cuerpo = new javax.swing.JPanel();
         cuerpoContenedor = new javax.swing.JPanel();
 
@@ -141,20 +147,43 @@ public class Base extends javax.swing.JFrame implements MouseListener {
         menuInicioText.setText("Inicio");
         menuInicio.add(menuInicioText);
 
+        menuCrédito.setBackground(new java.awt.Color(21, 101, 192));
+        menuCrédito.setAlignmentX(0.0F);
+        menuCrédito.setAlignmentY(0.0F);
+        menuCrédito.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menuCrédito.setPreferredSize(new java.awt.Dimension(128, 40));
+        menuCrédito.addMouseListener(this);
+        java.awt.FlowLayout flowLayout3 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 10);
+        flowLayout3.setAlignOnBaseline(true);
+        menuCrédito.setLayout(flowLayout3);
+
+        iconoMoneda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cooperativa/recursos/icono-casa.png"))); // NOI18N
+        menuCrédito.add(iconoMoneda);
+
+        menuCréditoTexto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        menuCréditoTexto.setForeground(new java.awt.Color(255, 255, 255));
+        menuCréditoTexto.setText("Créditos");
+        menuCrédito.add(menuCréditoTexto);
+
         javax.swing.GroupLayout menuCuerpoLayout = new javax.swing.GroupLayout(menuCuerpo);
         menuCuerpo.setLayout(menuCuerpoLayout);
         menuCuerpoLayout.setHorizontalGroup(
             menuCuerpoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuCuerpoLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(menuInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(menuCuerpoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(menuInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(menuCrédito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
         );
         menuCuerpoLayout.setVerticalGroup(
             menuCuerpoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuCuerpoLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
                 .addComponent(menuInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 547, Short.MAX_VALUE))
+                .addGap(10, 10, 10)
+                .addComponent(menuCrédito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(517, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
@@ -172,7 +201,7 @@ public class Base extends javax.swing.JFrame implements MouseListener {
             .addGroup(menuLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(menuEncabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(menuCuerpo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -183,15 +212,44 @@ public class Base extends javax.swing.JFrame implements MouseListener {
         encabezadoContenedor.setBackground(new java.awt.Color(25, 118, 210));
         encabezadoContenedor.setRequestFocusEnabled(false);
 
+        programaNombre1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        programaNombre1.setForeground(new java.awt.Color(255, 255, 255));
+        programaNombre1.setText("Inicio / Página Principal");
+
+        programaEncabezado1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        programaEncabezado1.setForeground(new java.awt.Color(255, 255, 255));
+        programaEncabezado1.setText("Vista principal");
+
+        programaNombre2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        programaNombre2.setForeground(new java.awt.Color(255, 255, 255));
+        programaNombre2.setText("Descripción de la vista...");
+
         javax.swing.GroupLayout encabezadoContenedorLayout = new javax.swing.GroupLayout(encabezadoContenedor);
         encabezadoContenedor.setLayout(encabezadoContenedorLayout);
         encabezadoContenedorLayout.setHorizontalGroup(
             encabezadoContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGroup(encabezadoContenedorLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(encabezadoContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(encabezadoContenedorLayout.createSequentialGroup()
+                        .addComponent(programaNombre2)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(encabezadoContenedorLayout.createSequentialGroup()
+                        .addComponent(programaEncabezado1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 379, Short.MAX_VALUE)
+                        .addComponent(programaNombre1)
+                        .addGap(20, 20, 20))))
         );
         encabezadoContenedorLayout.setVerticalGroup(
             encabezadoContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
+            .addGroup(encabezadoContenedorLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(encabezadoContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(programaNombre1)
+                    .addComponent(programaEncabezado1))
+                .addGap(25, 25, 25)
+                .addComponent(programaNombre2)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout encabezadoLayout = new javax.swing.GroupLayout(encabezado);
@@ -199,7 +257,7 @@ public class Base extends javax.swing.JFrame implements MouseListener {
         encabezadoLayout.setHorizontalGroup(
             encabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, encabezadoLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addGap(0, 0, 0)
                 .addComponent(encabezadoContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
         );
@@ -222,11 +280,11 @@ public class Base extends javax.swing.JFrame implements MouseListener {
         cuerpoContenedor.setLayout(cuerpoContenedorLayout);
         cuerpoContenedorLayout.setHorizontalGroup(
             cuerpoContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGap(0, 710, Short.MAX_VALUE)
         );
         cuerpoContenedorLayout.setVerticalGroup(
             cuerpoContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 594, Short.MAX_VALUE)
+            .addGap(0, 580, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout cuerpoLayout = new javax.swing.GroupLayout(cuerpo);
@@ -234,18 +292,19 @@ public class Base extends javax.swing.JFrame implements MouseListener {
         cuerpoLayout.setHorizontalGroup(
             cuerpoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cuerpoLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addGap(0, 0, 0)
                 .addComponent(cuerpoContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
         );
         cuerpoLayout.setVerticalGroup(
             cuerpoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cuerpoLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
                 .addComponent(cuerpoContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(10, 10, 10))
         );
 
-        getContentPane().add(cuerpo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 720, 600));
+        getContentPane().add(cuerpo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 720, 590));
 
         getAccessibleContext().setAccessibleDescription("");
         getAccessibleContext().setAccessibleParent(this);
@@ -262,17 +321,26 @@ public class Base extends javax.swing.JFrame implements MouseListener {
         if (evt.getSource() == menuInicio) {
             Base.this.menuInicioMouseEntered(evt);
         }
+        else if (evt.getSource() == menuCrédito) {
+            Base.this.menuCréditoMouseEntered(evt);
+        }
     }
 
     public void mouseExited(java.awt.event.MouseEvent evt) {
         if (evt.getSource() == menuInicio) {
             Base.this.menuInicioMouseExited(evt);
         }
+        else if (evt.getSource() == menuCrédito) {
+            Base.this.menuCréditoMouseExited(evt);
+        }
     }
 
     public void mousePressed(java.awt.event.MouseEvent evt) {
         if (evt.getSource() == menuInicio) {
             Base.this.menuInicioMousePressed(evt);
+        }
+        else if (evt.getSource() == menuCrédito) {
+            Base.this.menuCréditoMousePressed(evt);
         }
     }
 
@@ -290,6 +358,18 @@ public class Base extends javax.swing.JFrame implements MouseListener {
     private void menuInicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuInicioMouseExited
         quitarColorPresionado(menuInicio);
     }//GEN-LAST:event_menuInicioMouseExited
+
+    private void menuCréditoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCréditoMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuCréditoMouseEntered
+
+    private void menuCréditoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCréditoMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuCréditoMouseExited
+
+    private void menuCréditoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCréditoMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuCréditoMousePressed
 
     /**
      * @param args the command line arguments
@@ -336,13 +416,19 @@ public class Base extends javax.swing.JFrame implements MouseListener {
     javax.swing.JPanel encabezado;
     javax.swing.JPanel encabezadoContenedor;
     javax.swing.JLabel iconoCasa;
+    javax.swing.JLabel iconoMoneda;
     javax.swing.JPanel menu;
+    javax.swing.JPanel menuCrédito;
+    javax.swing.JLabel menuCréditoTexto;
     javax.swing.JPanel menuCuerpo;
     javax.swing.JPanel menuEncabezado;
     javax.swing.JPanel menuInicio;
     javax.swing.JLabel menuInicioText;
     javax.swing.JLabel programaEncabezado;
+    javax.swing.JLabel programaEncabezado1;
     javax.swing.JLabel programaNombre;
+    javax.swing.JLabel programaNombre1;
+    javax.swing.JLabel programaNombre2;
     javax.swing.JLabel programaVersion;
     // End of variables declaration//GEN-END:variables
 }
