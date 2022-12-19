@@ -360,15 +360,12 @@ public class Base extends javax.swing.JFrame implements MouseListener {
     }//GEN-LAST:event_menuInicioMouseExited
 
     private void menuCréditoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCréditoMouseEntered
-        // TODO add your handling code here:
     }//GEN-LAST:event_menuCréditoMouseEntered
 
     private void menuCréditoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCréditoMouseExited
-        // TODO add your handling code here:
     }//GEN-LAST:event_menuCréditoMouseExited
 
     private void menuCréditoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCréditoMousePressed
-        // TODO add your handling code here:
     }//GEN-LAST:event_menuCréditoMousePressed
 
     /**
