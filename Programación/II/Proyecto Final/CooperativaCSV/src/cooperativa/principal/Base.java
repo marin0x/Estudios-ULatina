@@ -7,6 +7,11 @@ package cooperativa.principal;
 import java.awt.Color;
 import java.awt.event.MouseListener;
 import javax.swing.JPanel;
+import cooperativa.vistas.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,6 +24,30 @@ public class Base extends javax.swing.JFrame implements MouseListener {
      */
     public Base() {
         initComponents();
+        
+        VerInicio vista = new VerInicio();
+        vista.setSize(710, 580);
+        vista.setLocation(0, 0);
+        
+        cuerpoContenedor.removeAll();
+        cuerpoContenedor.add(vista);
+        cuerpoContenedor.revalidate();
+        
+        encabezadoTítulo.setText("Inicio");
+        encabezadoDescripción.setText("Gestione todo con un solo clic");
+        
+        File f = new File("tipopersonas.csv");
+        if(!f.exists()) {
+            File tipoPersonasCSV = new File("tipopersonas.csv");
+            try {
+                if (tipoPersonasCSV.createNewFile()) {
+                    System.out.println("Archivo generado por seguridad: " + tipoPersonasCSV.getName());
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
     }
     
     /**
@@ -59,11 +88,20 @@ public class Base extends javax.swing.JFrame implements MouseListener {
         menuCrédito = new javax.swing.JPanel();
         iconoMoneda = new javax.swing.JLabel();
         menuCréditoTexto = new javax.swing.JLabel();
+        menuDébito = new javax.swing.JPanel();
+        iconoMoneda1 = new javax.swing.JLabel();
+        menuDébitoTexto = new javax.swing.JLabel();
+        menuPersona = new javax.swing.JPanel();
+        iconoMoneda2 = new javax.swing.JLabel();
+        menuPersonaTexto = new javax.swing.JLabel();
+        menuMovimiento = new javax.swing.JPanel();
+        iconoMoneda3 = new javax.swing.JLabel();
+        menuMovimientoTexto = new javax.swing.JLabel();
         encabezado = new javax.swing.JPanel();
         encabezadoContenedor = new javax.swing.JPanel();
-        programaNombre1 = new javax.swing.JLabel();
-        programaEncabezado1 = new javax.swing.JLabel();
-        programaNombre2 = new javax.swing.JLabel();
+        encabezadoGuía = new javax.swing.JLabel();
+        encabezadoTítulo = new javax.swing.JLabel();
+        encabezadoDescripción = new javax.swing.JLabel();
         cuerpo = new javax.swing.JPanel();
         cuerpoContenedor = new javax.swing.JPanel();
 
@@ -78,7 +116,7 @@ public class Base extends javax.swing.JFrame implements MouseListener {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        menu.setBackground(new java.awt.Color(0, 0, 0));
+        menu.setBackground(new java.awt.Color(13, 71, 161));
 
         menuEncabezado.setBackground(new java.awt.Color(13, 71, 161));
 
@@ -127,7 +165,7 @@ public class Base extends javax.swing.JFrame implements MouseListener {
                 .addGap(20, 20, 20))
         );
 
-        menuCuerpo.setBackground(new java.awt.Color(0, 0, 0));
+        menuCuerpo.setBackground(new java.awt.Color(13, 71, 161));
 
         menuInicio.setBackground(new java.awt.Color(21, 101, 192));
         menuInicio.setAlignmentX(0.0F);
@@ -139,7 +177,7 @@ public class Base extends javax.swing.JFrame implements MouseListener {
         flowLayout1.setAlignOnBaseline(true);
         menuInicio.setLayout(flowLayout1);
 
-        iconoCasa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cooperativa/recursos/icono-casa.png"))); // NOI18N
+        iconoCasa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cooperativa/recursos/casa.png"))); // NOI18N
         menuInicio.add(iconoCasa);
 
         menuInicioText.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -157,13 +195,67 @@ public class Base extends javax.swing.JFrame implements MouseListener {
         flowLayout3.setAlignOnBaseline(true);
         menuCrédito.setLayout(flowLayout3);
 
-        iconoMoneda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cooperativa/recursos/icono-casa.png"))); // NOI18N
+        iconoMoneda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cooperativa/recursos/monedas.png"))); // NOI18N
         menuCrédito.add(iconoMoneda);
 
         menuCréditoTexto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         menuCréditoTexto.setForeground(new java.awt.Color(255, 255, 255));
         menuCréditoTexto.setText("Créditos");
         menuCrédito.add(menuCréditoTexto);
+
+        menuDébito.setBackground(new java.awt.Color(21, 101, 192));
+        menuDébito.setAlignmentX(0.0F);
+        menuDébito.setAlignmentY(0.0F);
+        menuDébito.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menuDébito.setPreferredSize(new java.awt.Dimension(128, 40));
+        menuDébito.addMouseListener(this);
+        java.awt.FlowLayout flowLayout5 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 10);
+        flowLayout5.setAlignOnBaseline(true);
+        menuDébito.setLayout(flowLayout5);
+
+        iconoMoneda1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cooperativa/recursos/monedas.png"))); // NOI18N
+        menuDébito.add(iconoMoneda1);
+
+        menuDébitoTexto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        menuDébitoTexto.setForeground(new java.awt.Color(255, 255, 255));
+        menuDébitoTexto.setText("Débitos");
+        menuDébito.add(menuDébitoTexto);
+
+        menuPersona.setBackground(new java.awt.Color(21, 101, 192));
+        menuPersona.setAlignmentX(0.0F);
+        menuPersona.setAlignmentY(0.0F);
+        menuPersona.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menuPersona.setPreferredSize(new java.awt.Dimension(128, 40));
+        menuPersona.addMouseListener(this);
+        java.awt.FlowLayout flowLayout2 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 10);
+        flowLayout2.setAlignOnBaseline(true);
+        menuPersona.setLayout(flowLayout2);
+
+        iconoMoneda2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cooperativa/recursos/users-alt.png"))); // NOI18N
+        menuPersona.add(iconoMoneda2);
+
+        menuPersonaTexto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        menuPersonaTexto.setForeground(new java.awt.Color(255, 255, 255));
+        menuPersonaTexto.setText("Personas");
+        menuPersona.add(menuPersonaTexto);
+
+        menuMovimiento.setBackground(new java.awt.Color(21, 101, 192));
+        menuMovimiento.setAlignmentX(0.0F);
+        menuMovimiento.setAlignmentY(0.0F);
+        menuMovimiento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menuMovimiento.setPreferredSize(new java.awt.Dimension(128, 40));
+        menuMovimiento.addMouseListener(this);
+        java.awt.FlowLayout flowLayout4 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 10);
+        flowLayout4.setAlignOnBaseline(true);
+        menuMovimiento.setLayout(flowLayout4);
+
+        iconoMoneda3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cooperativa/recursos/recibo.png"))); // NOI18N
+        menuMovimiento.add(iconoMoneda3);
+
+        menuMovimientoTexto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        menuMovimientoTexto.setForeground(new java.awt.Color(255, 255, 255));
+        menuMovimientoTexto.setText("Movimientos");
+        menuMovimiento.add(menuMovimientoTexto);
 
         javax.swing.GroupLayout menuCuerpoLayout = new javax.swing.GroupLayout(menuCuerpo);
         menuCuerpo.setLayout(menuCuerpoLayout);
@@ -173,7 +265,10 @@ public class Base extends javax.swing.JFrame implements MouseListener {
                 .addGap(10, 10, 10)
                 .addGroup(menuCuerpoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(menuInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(menuCrédito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(menuCrédito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(menuDébito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(menuPersona, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(menuMovimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
         );
         menuCuerpoLayout.setVerticalGroup(
@@ -183,6 +278,12 @@ public class Base extends javax.swing.JFrame implements MouseListener {
                 .addComponent(menuInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(menuCrédito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(menuDébito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(menuPersona, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(menuMovimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(517, Short.MAX_VALUE))
         );
 
@@ -207,22 +308,22 @@ public class Base extends javax.swing.JFrame implements MouseListener {
 
         getContentPane().add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 730));
 
-        encabezado.setBackground(new java.awt.Color(0, 0, 0));
+        encabezado.setBackground(new java.awt.Color(25, 118, 210));
 
         encabezadoContenedor.setBackground(new java.awt.Color(25, 118, 210));
         encabezadoContenedor.setRequestFocusEnabled(false);
 
-        programaNombre1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        programaNombre1.setForeground(new java.awt.Color(255, 255, 255));
-        programaNombre1.setText("Inicio / Página Principal");
+        encabezadoGuía.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        encabezadoGuía.setForeground(new java.awt.Color(255, 255, 255));
+        encabezadoGuía.setText("Inicio / Cooperativa / ?");
 
-        programaEncabezado1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        programaEncabezado1.setForeground(new java.awt.Color(255, 255, 255));
-        programaEncabezado1.setText("Vista principal");
+        encabezadoTítulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        encabezadoTítulo.setForeground(new java.awt.Color(255, 255, 255));
+        encabezadoTítulo.setText("Vista principal");
 
-        programaNombre2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        programaNombre2.setForeground(new java.awt.Color(255, 255, 255));
-        programaNombre2.setText("Descripción de la vista...");
+        encabezadoDescripción.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        encabezadoDescripción.setForeground(new java.awt.Color(255, 255, 255));
+        encabezadoDescripción.setText("Descripción de la vista...");
 
         javax.swing.GroupLayout encabezadoContenedorLayout = new javax.swing.GroupLayout(encabezadoContenedor);
         encabezadoContenedor.setLayout(encabezadoContenedorLayout);
@@ -232,24 +333,24 @@ public class Base extends javax.swing.JFrame implements MouseListener {
                 .addGap(20, 20, 20)
                 .addGroup(encabezadoContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(encabezadoContenedorLayout.createSequentialGroup()
-                        .addComponent(programaNombre2)
+                        .addComponent(encabezadoDescripción)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(encabezadoContenedorLayout.createSequentialGroup()
-                        .addComponent(programaEncabezado1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 379, Short.MAX_VALUE)
-                        .addComponent(programaNombre1)
+                        .addComponent(encabezadoTítulo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 382, Short.MAX_VALUE)
+                        .addComponent(encabezadoGuía)
                         .addGap(20, 20, 20))))
         );
         encabezadoContenedorLayout.setVerticalGroup(
             encabezadoContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(encabezadoContenedorLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(encabezadoContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(programaNombre1)
-                    .addComponent(programaEncabezado1))
-                .addGap(25, 25, 25)
-                .addComponent(programaNombre2)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addComponent(encabezadoGuía)
+                .addGap(0, 0, 0)
+                .addComponent(encabezadoTítulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(encabezadoDescripción)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout encabezadoLayout = new javax.swing.GroupLayout(encabezado);
@@ -271,36 +372,39 @@ public class Base extends javax.swing.JFrame implements MouseListener {
 
         getContentPane().add(encabezado, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 720, 140));
 
-        cuerpo.setBackground(new java.awt.Color(0, 0, 0));
+        cuerpo.setBackground(new java.awt.Color(249, 249, 249));
         cuerpo.setMaximumSize(null);
 
         cuerpoContenedor.setBackground(new java.awt.Color(255, 255, 255));
+        cuerpoContenedor.setMaximumSize(new java.awt.Dimension(710, 580));
+        cuerpoContenedor.setMinimumSize(new java.awt.Dimension(710, 580));
+        cuerpoContenedor.setName(""); // NOI18N
 
         javax.swing.GroupLayout cuerpoContenedorLayout = new javax.swing.GroupLayout(cuerpoContenedor);
         cuerpoContenedor.setLayout(cuerpoContenedorLayout);
         cuerpoContenedorLayout.setHorizontalGroup(
             cuerpoContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 710, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         cuerpoContenedorLayout.setVerticalGroup(
             cuerpoContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 580, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout cuerpoLayout = new javax.swing.GroupLayout(cuerpo);
         cuerpo.setLayout(cuerpoLayout);
         cuerpoLayout.setHorizontalGroup(
             cuerpoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cuerpoLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(cuerpoContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(cuerpoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cuerpoContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 704, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
         );
         cuerpoLayout.setVerticalGroup(
             cuerpoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cuerpoLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(cuerpoContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(cuerpoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cuerpoContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 574, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
         );
 
@@ -315,6 +419,15 @@ public class Base extends javax.swing.JFrame implements MouseListener {
     // Code for dispatching events from components to event handlers.
 
     public void mouseClicked(java.awt.event.MouseEvent evt) {
+        if (evt.getSource() == menuInicio) {
+            Base.this.menuInicioMouseClicked(evt);
+        }
+        else if (evt.getSource() == menuCrédito) {
+            Base.this.menuCréditoMouseClicked(evt);
+        }
+        else if (evt.getSource() == menuPersona) {
+            Base.this.menuPersonaMouseClicked(evt);
+        }
     }
 
     public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -323,6 +436,15 @@ public class Base extends javax.swing.JFrame implements MouseListener {
         }
         else if (evt.getSource() == menuCrédito) {
             Base.this.menuCréditoMouseEntered(evt);
+        }
+        else if (evt.getSource() == menuDébito) {
+            Base.this.menuDébitoMouseEntered(evt);
+        }
+        else if (evt.getSource() == menuPersona) {
+            Base.this.menuPersonaMouseEntered(evt);
+        }
+        else if (evt.getSource() == menuMovimiento) {
+            Base.this.menuMovimientoMouseEntered(evt);
         }
     }
 
@@ -333,6 +455,15 @@ public class Base extends javax.swing.JFrame implements MouseListener {
         else if (evt.getSource() == menuCrédito) {
             Base.this.menuCréditoMouseExited(evt);
         }
+        else if (evt.getSource() == menuDébito) {
+            Base.this.menuDébitoMouseExited(evt);
+        }
+        else if (evt.getSource() == menuPersona) {
+            Base.this.menuPersonaMouseExited(evt);
+        }
+        else if (evt.getSource() == menuMovimiento) {
+            Base.this.menuMovimientoMouseExited(evt);
+        }
     }
 
     public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -342,13 +473,21 @@ public class Base extends javax.swing.JFrame implements MouseListener {
         else if (evt.getSource() == menuCrédito) {
             Base.this.menuCréditoMousePressed(evt);
         }
+        else if (evt.getSource() == menuDébito) {
+            Base.this.menuDébitoMousePressed(evt);
+        }
+        else if (evt.getSource() == menuPersona) {
+            Base.this.menuPersonaMousePressed(evt);
+        }
+        else if (evt.getSource() == menuMovimiento) {
+            Base.this.menuMovimientoMousePressed(evt);
+        }
     }
 
     public void mouseReleased(java.awt.event.MouseEvent evt) {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuInicioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuInicioMousePressed
-        System.out.println("Prueba");
     }//GEN-LAST:event_menuInicioMousePressed
 
     private void menuInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuInicioMouseEntered
@@ -360,13 +499,93 @@ public class Base extends javax.swing.JFrame implements MouseListener {
     }//GEN-LAST:event_menuInicioMouseExited
 
     private void menuCréditoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCréditoMouseEntered
+        aplicarColorPresionado(menuCrédito);
     }//GEN-LAST:event_menuCréditoMouseEntered
 
     private void menuCréditoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCréditoMouseExited
+        quitarColorPresionado(menuCrédito);
     }//GEN-LAST:event_menuCréditoMouseExited
 
     private void menuCréditoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCréditoMousePressed
     }//GEN-LAST:event_menuCréditoMousePressed
+
+    private void menuDébitoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuDébitoMouseEntered
+        aplicarColorPresionado(menuDébito);
+    }//GEN-LAST:event_menuDébitoMouseEntered
+
+    private void menuDébitoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuDébitoMouseExited
+        quitarColorPresionado(menuDébito);
+    }//GEN-LAST:event_menuDébitoMouseExited
+
+    private void menuDébitoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuDébitoMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuDébitoMousePressed
+
+    private void menuPersonaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPersonaMouseEntered
+        aplicarColorPresionado(menuPersona);
+    }//GEN-LAST:event_menuPersonaMouseEntered
+
+    private void menuPersonaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPersonaMouseExited
+        quitarColorPresionado(menuPersona);
+    }//GEN-LAST:event_menuPersonaMouseExited
+
+    private void menuPersonaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPersonaMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuPersonaMousePressed
+
+    private void menuMovimientoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMovimientoMouseEntered
+        aplicarColorPresionado(menuMovimiento);
+    }//GEN-LAST:event_menuMovimientoMouseEntered
+
+    private void menuMovimientoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMovimientoMouseExited
+        quitarColorPresionado(menuMovimiento);
+    }//GEN-LAST:event_menuMovimientoMouseExited
+
+    private void menuMovimientoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMovimientoMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuMovimientoMousePressed
+
+    private void menuCréditoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCréditoMouseClicked
+        VerCréditos vista = new VerCréditos();
+        vista.setSize(710, 580);
+        vista.setLocation(0, 0);
+        
+        cuerpoContenedor.removeAll();
+        cuerpoContenedor.add(vista);
+        cuerpoContenedor.revalidate();
+        cuerpoContenedor.repaint();
+        
+        encabezadoTítulo.setText("Créditos");
+        encabezadoDescripción.setText("Gestione los movimientos del crédito");
+    }//GEN-LAST:event_menuCréditoMouseClicked
+
+    private void menuInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuInicioMouseClicked
+        VerInicio vista = new VerInicio();
+        vista.setSize(710, 580);
+        vista.setLocation(0, 0);
+        
+        cuerpoContenedor.removeAll();
+        cuerpoContenedor.add(vista);
+        cuerpoContenedor.revalidate();
+        cuerpoContenedor.repaint();
+        
+        encabezadoTítulo.setText("Inicio");
+        encabezadoDescripción.setText("Gestione todo con un solo clic");
+    }//GEN-LAST:event_menuInicioMouseClicked
+
+    private void menuPersonaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPersonaMouseClicked
+        VerPersonas vista = new VerPersonas();
+        vista.setSize(710, 580);
+        vista.setLocation(0, 0);
+        
+        cuerpoContenedor.removeAll();
+        cuerpoContenedor.add(vista);
+        cuerpoContenedor.revalidate();
+        cuerpoContenedor.repaint();
+        
+        encabezadoTítulo.setText("Personas");
+        encabezadoDescripción.setText("Miembros de la Cooperativa");
+    }//GEN-LAST:event_menuPersonaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -408,24 +627,33 @@ public class Base extends javax.swing.JFrame implements MouseListener {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JPanel cuerpo;
-    javax.swing.JPanel cuerpoContenedor;
+    public static javax.swing.JPanel cuerpoContenedor;
     javax.swing.JSeparator elementoSeparador;
     javax.swing.JPanel encabezado;
     javax.swing.JPanel encabezadoContenedor;
+    javax.swing.JLabel encabezadoDescripción;
+    javax.swing.JLabel encabezadoGuía;
+    javax.swing.JLabel encabezadoTítulo;
     javax.swing.JLabel iconoCasa;
     javax.swing.JLabel iconoMoneda;
+    javax.swing.JLabel iconoMoneda1;
+    javax.swing.JLabel iconoMoneda2;
+    javax.swing.JLabel iconoMoneda3;
     javax.swing.JPanel menu;
     javax.swing.JPanel menuCrédito;
     javax.swing.JLabel menuCréditoTexto;
     javax.swing.JPanel menuCuerpo;
+    javax.swing.JPanel menuDébito;
+    javax.swing.JLabel menuDébitoTexto;
     javax.swing.JPanel menuEncabezado;
     javax.swing.JPanel menuInicio;
     javax.swing.JLabel menuInicioText;
+    javax.swing.JPanel menuMovimiento;
+    javax.swing.JLabel menuMovimientoTexto;
+    javax.swing.JPanel menuPersona;
+    javax.swing.JLabel menuPersonaTexto;
     javax.swing.JLabel programaEncabezado;
-    javax.swing.JLabel programaEncabezado1;
     javax.swing.JLabel programaNombre;
-    javax.swing.JLabel programaNombre1;
-    javax.swing.JLabel programaNombre2;
     javax.swing.JLabel programaVersion;
     // End of variables declaration//GEN-END:variables
 }
