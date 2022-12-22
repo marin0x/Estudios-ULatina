@@ -307,7 +307,7 @@ public class CrearDébito extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void comboIdMovimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboIdMovimientoActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_comboIdMovimientoActionPerformed
 
 

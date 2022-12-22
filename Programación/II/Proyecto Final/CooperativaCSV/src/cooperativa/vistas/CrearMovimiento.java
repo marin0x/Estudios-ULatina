@@ -361,11 +361,11 @@ public class CrearMovimiento extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void comboIdPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboIdPersonaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_comboIdPersonaActionPerformed
 
     private void comboIdConceptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboIdConceptoActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_comboIdConceptoActionPerformed
 
 

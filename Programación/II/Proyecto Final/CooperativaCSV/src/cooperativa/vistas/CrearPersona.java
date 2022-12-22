@@ -345,7 +345,7 @@ public class CrearPersona extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void comboIdTipoPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboIdTipoPersonaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_comboIdTipoPersonaActionPerformed
 
 
