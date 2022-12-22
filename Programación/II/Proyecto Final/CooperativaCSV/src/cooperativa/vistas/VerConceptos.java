@@ -19,10 +19,10 @@ package cooperativa.vistas;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
+import cooperativa.objetos.Concepto;
 import cooperativa.objetos.TipoPersona;
 import static cooperativa.principal.Base.cuerpoContenedor;
 import static cooperativa.principal.Base.refrescaVista;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -37,26 +37,26 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author marin
  */
-public class VerTipoPersonas extends javax.swing.JPanel {
+public class VerConceptos extends javax.swing.JPanel {
     
     private int idColumna = -1;
-    private ArrayList<TipoPersona> TipoPersonas = new ArrayList();
+    private ArrayList<Concepto> Conceptos = new ArrayList();
     private int lineas = 0;
     
     /**
      * Creates new form Inicio
      */
-    public VerTipoPersonas() {
+    public VerConceptos() {
         
         try {
             initComponents();
             
-            CSVReader origen = new CSVReader(new FileReader("tipopersonas.csv"));
+            CSVReader origen = new CSVReader(new FileReader("conceptos.csv"));
             String[] linea = null;
             
             while((linea = origen.readNext()) != null) {
                 lineas++;
-                TipoPersonas.add(new TipoPersona(Integer.parseInt(linea[0]), linea[1], linea[2]));
+                Conceptos.add(new Concepto(Integer.parseInt(linea[0]), linea[1], linea[2]));
             }
             
             origen.close();
@@ -64,11 +64,11 @@ public class VerTipoPersonas extends javax.swing.JPanel {
             
             String list[][] = new String[lineas][3];
             
-            for (int i = 0; i < TipoPersonas.size(); i++){
+            for (int i = 0; i < Conceptos.size(); i++){
                 
-                list[i][0] = String.valueOf(TipoPersonas.get(i).getIdTipoPersona());
-                list[i][1] = TipoPersonas.get(i).getNombreTipoPersona();
-                switch(TipoPersonas.get(i).getStatus()) {
+                list[i][0] = String.valueOf(Conceptos.get(i).getIdConcepto());
+                list[i][1] = Conceptos.get(i).getNombreConcepto();
+                switch(Conceptos.get(i).getStatus()) {
                     case "0":
                         list[i][2] = "Inactivo";
                         break;
@@ -85,13 +85,13 @@ public class VerTipoPersonas extends javax.swing.JPanel {
             }
             
             Tabla.setModel(new javax.swing.table.DefaultTableModel(list, new String [] {
-                "idTipoPersona", "NombreTipoPersona", "status"})
+                "idConcepto", "NombreConcepto", "status"})
             );
             
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(VerTipoPersonas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VerConceptos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException | CsvValidationException ex) {
-            Logger.getLogger(VerTipoPersonas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VerConceptos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -119,14 +119,14 @@ public class VerTipoPersonas extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(710, 580));
 
         Título.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        Título.setText("Tipos de persona");
+        Título.setText("Conceptos");
 
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "idTipoPersona", "NombreTipoPersona", "status"
+                "idConcepto", "NombreConcepto", "status"
             }
         ) {
             Class[] types = new Class [] {
@@ -164,14 +164,14 @@ public class VerTipoPersonas extends javax.swing.JPanel {
             Tabla.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        BtnCrear.setText("Crear nuevo tipo de persona");
+        BtnCrear.setText("Crear nuevo concepto");
         BtnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCrearActionPerformed(evt);
             }
         });
 
-        BtnEliminar.setText("Eliminar tipo de persona");
+        BtnEliminar.setText("Eliminar concepto");
         BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnEliminarActionPerformed(evt);
@@ -184,7 +184,7 @@ public class VerTipoPersonas extends javax.swing.JPanel {
         TxtResultados.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         TxtResultados.setText("0");
 
-        BtnVolver.setText("Volver a personas");
+        BtnVolver.setText("Volver a movimientos");
         BtnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnVolverActionPerformed(evt);
@@ -243,31 +243,31 @@ public class VerTipoPersonas extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una línea, verifica de nuevo", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             DefaultTableModel model = (DefaultTableModel)Tabla.getModel();
-            TipoPersonas.remove(idColumna);
+            Conceptos.remove(idColumna);
             try {
-                CSVWriter destino = new CSVWriter(new FileWriter("tipopersonas.csv", false));
-                for (TipoPersona tipo : TipoPersonas) {
+                CSVWriter destino = new CSVWriter(new FileWriter("conceptos.csv", false));
+                for (Concepto tipo : Conceptos) {
                     String[] datos = tipo.getArray();
                     destino.writeNext(datos);
                 }
                 
                 destino.close();
                 
-                JOptionPane.showMessageDialog(null, "El tipo de persona se ha eliminado exitosamente");
+                JOptionPane.showMessageDialog(null, "El concepto se ha eliminado exitosamente");
 
-                refrescaVista(new VerTipoPersonas(), "", "");
+                refrescaVista(new VerConceptos(), "", "");
             } catch (IOException ex) {
-                Logger.getLogger(VerTipoPersonas.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(VerConceptos.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCrearActionPerformed
-        refrescaVista(new CrearTipoPersona(), "", "");
+        refrescaVista(new CrearConcepto(), "", "");
     }//GEN-LAST:event_BtnCrearActionPerformed
 
     private void BtnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVolverActionPerformed
-        refrescaVista(new VerPersonas(), "", "");
+        refrescaVista(new VerMovimientos(), "", "");
     }//GEN-LAST:event_BtnVolverActionPerformed
 
     private void TablaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_TablaPropertyChange

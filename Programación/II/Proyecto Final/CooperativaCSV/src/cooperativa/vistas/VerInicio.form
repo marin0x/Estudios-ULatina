@@ -36,7 +36,7 @@
                   <Component id="Título" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="Descripción" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="123" max="32767" attributes="0"/>
+              <EmptySpace pref="126" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -58,12 +58,12 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="24" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Bienvenido a Cooperativa G. Y. A."/>
+        <Property name="text" type="java.lang.String" value="Bienvenido a Cooperativa G. J. A."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="Descripci&#xf3;n">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Bienvenido a Cooperativa G. Y. A. A su izquierda encontrar&#xe1; un men&#xfa; donde podr&#xe1; gestionar la cooperativa."/>
+        <Property name="text" type="java.lang.String" value="Bienvenido a Cooperativa G. J. A. A su izquierda encontrar&#xe1; un men&#xfa; donde podr&#xe1; gestionar la cooperativa."/>
       </Properties>
     </Component>
   </SubComponents>

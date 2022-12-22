@@ -46,7 +46,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="Título1" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="Título2" pref="9" max="32767" attributes="0"/>
+                      <Component id="TxtResultados" pref="9" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -63,7 +63,7 @@
                       <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="2" attributes="0">
                           <Component id="Título1" alignment="1" max="32767" attributes="0"/>
-                          <Component id="Título2" alignment="2" max="32767" attributes="0"/>
+                          <Component id="TxtResultados" alignment="2" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -97,7 +97,7 @@
         <Property name="text" type="java.lang.String" value="Resultados"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="T&#xed;tulo2">
+    <Component class="javax.swing.JLabel" name="TxtResultados">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="14" style="0"/>
@@ -174,6 +174,9 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TablaMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

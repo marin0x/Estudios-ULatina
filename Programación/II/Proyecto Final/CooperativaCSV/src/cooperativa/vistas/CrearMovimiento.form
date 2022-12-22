@@ -42,7 +42,7 @@
                           <Component id="Panel" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="Título" min="-2" pref="277" max="-2" attributes="0"/>
-                              <EmptySpace pref="273" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -66,7 +66,7 @@
               </Group>
               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
               <Component id="Panel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="91" max="32767" attributes="0"/>
+              <EmptySpace pref="135" max="32767" attributes="0"/>
               <Component id="btnCrear" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
@@ -80,42 +80,42 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="Mail" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="Importe" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="idPersona" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="status" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="statusVal" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="statusVal1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                  <Component id="statusVal2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                  <Component id="statusVal3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="Detalle" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="MailVal" alignment="0" max="32767" attributes="0"/>
-                              <Component id="NumeroTelVal" alignment="0" max="32767" attributes="0"/>
-                              <Component id="NumeroCelVal" alignment="0" max="32767" attributes="0"/>
-                              <Component id="NombrePersonaVal" alignment="0" max="32767" attributes="0"/>
-                              <Component id="comboIdTipoPersona" alignment="0" max="32767" attributes="0"/>
-                              <Component id="DireccionVal" alignment="0" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="NumeroTel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="NumeroCel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="NombrePersona" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="idTipoPersona" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="status" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="statusVal" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="statusVal1" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                          <Component id="statusVal2" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                          <Component id="statusVal3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="Direccion" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="FechaVal" alignment="0" max="32767" attributes="0"/>
+                              <Component id="ImporteVal" alignment="0" max="32767" attributes="0"/>
+                              <Component id="comboIdPersona" alignment="0" pref="630" max="32767" attributes="0"/>
+                              <Component id="DetalleVal" alignment="0" max="32767" attributes="0"/>
+                              <Component id="comboIdConcepto" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="idConcepto" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="Fecha" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -123,32 +123,28 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="idTipoPersona" min="-2" max="-2" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                  <Component id="Fecha" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="comboIdTipoPersona" min="-2" max="-2" attributes="0"/>
+                  <Component id="FechaVal" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="NombrePersona" min="-2" max="-2" attributes="0"/>
+                  <Component id="idPersona" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="NombrePersonaVal" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboIdPersona" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="Direccion" min="-2" max="-2" attributes="0"/>
+                  <Component id="idConcepto" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="DireccionVal" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboIdConcepto" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="NumeroTel" min="-2" max="-2" attributes="0"/>
+                  <Component id="Detalle" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="NumeroTelVal" min="-2" max="-2" attributes="0"/>
+                  <Component id="DetalleVal" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="NumeroCel" min="-2" max="-2" attributes="0"/>
+                  <Component id="Importe" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="NumeroCelVal" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="Mail" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="MailVal" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="ImporteVal" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="status" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -157,15 +153,15 @@
                       <Component id="statusVal2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="statusVal3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="idTipoPersona">
+        <Component class="javax.swing.JLabel" name="idPersona">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Tipo de persona"/>
+            <Property name="text" type="java.lang.String" value="Persona"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="status">
@@ -216,53 +212,57 @@
             <Property name="actionCommand" type="java.lang.String" value="3"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="comboIdTipoPersona">
+        <Component class="javax.swing.JComboBox" name="comboIdPersona">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboIdTipoPersonaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboIdPersonaActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="NombrePersonaVal">
+        <Component class="javax.swing.JTextField" name="DetalleVal">
         </Component>
-        <Component class="javax.swing.JLabel" name="NombrePersona">
+        <Component class="javax.swing.JLabel" name="Detalle">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Nombre de la persona"/>
+            <Property name="text" type="java.lang.String" value="Detalle"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="DireccionVal">
-        </Component>
-        <Component class="javax.swing.JLabel" name="Direccion">
+        <Component class="javax.swing.JLabel" name="Importe">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Direcci&#xf3;n"/>
+            <Property name="text" type="java.lang.String" value="Importe"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="NumeroTel">
+        <Component class="javax.swing.JTextField" name="ImporteVal">
+        </Component>
+        <Component class="javax.swing.JTextField" name="FechaVal">
+        </Component>
+        <Component class="javax.swing.JLabel" name="Fecha">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Tel."/>
+            <Property name="text" type="java.lang.String" value="Fecha"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="NumeroTelVal">
-        </Component>
-        <Component class="javax.swing.JTextField" name="NumeroCelVal">
-        </Component>
-        <Component class="javax.swing.JLabel" name="NumeroCel">
+        <Component class="javax.swing.JLabel" name="idConcepto">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cel."/>
+            <Property name="text" type="java.lang.String" value="Concepto"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="MailVal">
-        </Component>
-        <Component class="javax.swing.JLabel" name="Mail">
+        <Component class="javax.swing.JComboBox" name="comboIdConcepto">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Correo electr&#xf3;nico"/>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboIdConceptoActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
@@ -271,12 +271,12 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="24" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Crear persona"/>
+        <Property name="text" type="java.lang.String" value="Crear movimiento"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnCrear">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Crear persona"/>
+        <Property name="text" type="java.lang.String" value="Crear movimiento"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCrearActionPerformed"/>

@@ -47,9 +47,9 @@ public class VerInicio extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(710, 580));
 
         Título.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        Título.setText("Bienvenido a Cooperativa G. Y. A.");
+        Título.setText("Bienvenido a Cooperativa G. J. A.");
 
-        Descripción.setText("Bienvenido a Cooperativa G. Y. A. A su izquierda encontrará un menú donde podrá gestionar la cooperativa.");
+        Descripción.setText("Bienvenido a Cooperativa G. J. A. A su izquierda encontrará un menú donde podrá gestionar la cooperativa.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -60,7 +60,7 @@ public class VerInicio extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Título)
                     .addComponent(Descripción))
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

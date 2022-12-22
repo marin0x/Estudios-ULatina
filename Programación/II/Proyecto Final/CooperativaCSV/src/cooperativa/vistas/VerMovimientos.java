@@ -15,14 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package cooperativa.vistas;
-
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
-import cooperativa.objetos.TipoPersona;
+import cooperativa.objetos.Movimiento;
 import static cooperativa.principal.Base.cuerpoContenedor;
 import static cooperativa.principal.Base.refrescaVista;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -37,61 +35,64 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author marin
  */
-public class VerTipoPersonas extends javax.swing.JPanel {
+public class VerMovimientos extends javax.swing.JPanel {
     
     private int idColumna = -1;
-    private ArrayList<TipoPersona> TipoPersonas = new ArrayList();
+    private ArrayList<Movimiento> Movimientos = new ArrayList();
     private int lineas = 0;
-    
+
     /**
      * Creates new form Inicio
      */
-    public VerTipoPersonas() {
-        
+    public VerMovimientos() {
         try {
             initComponents();
             
-            CSVReader origen = new CSVReader(new FileReader("tipopersonas.csv"));
+            CSVReader origen = new CSVReader(new FileReader("movimientos.csv"));
             String[] linea = null;
             
             while((linea = origen.readNext()) != null) {
                 lineas++;
-                TipoPersonas.add(new TipoPersona(Integer.parseInt(linea[0]), linea[1], linea[2]));
+                Movimientos.add(new Movimiento(Integer.parseInt(linea[0]), linea[1], Integer.parseInt(linea[2]), Integer.parseInt(linea[3]), linea[4], Double.parseDouble(linea[5]), linea[6]));
             }
             
             origen.close();
             TxtResultados.setText(String.valueOf(lineas));
             
-            String list[][] = new String[lineas][3];
+            String list[][] = new String[lineas][8];
             
-            for (int i = 0; i < TipoPersonas.size(); i++){
+            for (int i = 0; i < Movimientos.size(); i++){
                 
-                list[i][0] = String.valueOf(TipoPersonas.get(i).getIdTipoPersona());
-                list[i][1] = TipoPersonas.get(i).getNombreTipoPersona();
-                switch(TipoPersonas.get(i).getStatus()) {
+                list[i][0] = String.valueOf(Movimientos.get(i).getIdMovimiento());
+                list[i][1] = Movimientos.get(i).getFecha();
+                list[i][2] = String.valueOf(Movimientos.get(i).getIdPersona());
+                list[i][3] = String.valueOf(Movimientos.get(i).getIdConcepto());
+                list[i][4] = Movimientos.get(i).getDetalle();
+                list[i][5] = String.valueOf(Movimientos.get(i).getImporte());
+                switch(Movimientos.get(i).getStatus()) {
                     case "0":
-                        list[i][2] = "Inactivo";
+                        list[i][6] = "Inactivo (0)";
                         break;
                     case "1":
-                        list[i][2] = "Revisión";
+                        list[i][6] = "Revisión (1)";
                         break;
                     case "2":
-                        list[i][2] = "Activo";
+                        list[i][6] = "Activo (2)";
                         break;
                     case "3":
-                        list[i][2] = "Bloqueado";
+                        list[i][6] = "Bloqueado (3)";
                         break;
                 }
             }
             
             Tabla.setModel(new javax.swing.table.DefaultTableModel(list, new String [] {
-                "idTipoPersona", "NombreTipoPersona", "status"})
+                "idMovimiento", "Fecha", "idPersona", "idConcepto", "Detalle", "Importe", "status"})
             );
             
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(VerTipoPersonas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VerMovimientos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException | CsvValidationException ex) {
-            Logger.getLogger(VerTipoPersonas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VerMovimientos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -105,13 +106,14 @@ public class VerTipoPersonas extends javax.swing.JPanel {
     private void initComponents() {
 
         Título = new javax.swing.JLabel();
+        Título1 = new javax.swing.JLabel();
+        TxtResultados = new javax.swing.JLabel();
         TablaContenedor = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
         BtnCrear = new javax.swing.JButton();
         BtnEliminar = new javax.swing.JButton();
-        Título1 = new javax.swing.JLabel();
-        TxtResultados = new javax.swing.JLabel();
-        BtnVolver = new javax.swing.JButton();
+        BtnVerTiposPersonas = new javax.swing.JButton();
+        BtnVerTiposPersonas1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(710, 580));
@@ -119,21 +121,27 @@ public class VerTipoPersonas extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(710, 580));
 
         Título.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        Título.setText("Tipos de persona");
+        Título.setText("Movimientos");
+
+        Título1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Título1.setText("Resultados");
+
+        TxtResultados.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        TxtResultados.setText("0");
 
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "idTipoPersona", "NombreTipoPersona", "status"
+                "idMovimiento", "Fecha", "idPersona", "idConcepto", "Detalle", "Importe", "status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Short.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Short.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -144,50 +152,48 @@ public class VerTipoPersonas extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        Tabla.setColumnSelectionAllowed(true);
         Tabla.getTableHeader().setReorderingAllowed(false);
         Tabla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablaMouseClicked(evt);
             }
         });
-        Tabla.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                TablaPropertyChange(evt);
-            }
-        });
         TablaContenedor.setViewportView(Tabla);
-        Tabla.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (Tabla.getColumnModel().getColumnCount() > 0) {
             Tabla.getColumnModel().getColumn(0).setResizable(false);
             Tabla.getColumnModel().getColumn(1).setResizable(false);
             Tabla.getColumnModel().getColumn(2).setResizable(false);
+            Tabla.getColumnModel().getColumn(3).setResizable(false);
+            Tabla.getColumnModel().getColumn(4).setResizable(false);
+            Tabla.getColumnModel().getColumn(5).setResizable(false);
+            Tabla.getColumnModel().getColumn(6).setResizable(false);
         }
 
-        BtnCrear.setText("Crear nuevo tipo de persona");
+        BtnCrear.setText("Crear movimiento");
         BtnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCrearActionPerformed(evt);
             }
         });
 
-        BtnEliminar.setText("Eliminar tipo de persona");
+        BtnEliminar.setText("Eliminar movimiento");
         BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnEliminarActionPerformed(evt);
             }
         });
 
-        Título1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Título1.setText("Resultados");
-
-        TxtResultados.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        TxtResultados.setText("0");
-
-        BtnVolver.setText("Volver a personas");
-        BtnVolver.addActionListener(new java.awt.event.ActionListener() {
+        BtnVerTiposPersonas.setText("Ver movimientos de crédito");
+        BtnVerTiposPersonas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnVolverActionPerformed(evt);
+                BtnVerTiposPersonasActionPerformed(evt);
+            }
+        });
+
+        BtnVerTiposPersonas1.setText("Ver movimientos de débito");
+        BtnVerTiposPersonas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnVerTiposPersonas1ActionPerformed(evt);
             }
         });
 
@@ -196,24 +202,23 @@ public class VerTipoPersonas extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BtnVolver)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BtnVerTiposPersonas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnVerTiposPersonas1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BtnEliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnCrear))
+                    .addComponent(TablaContenedor)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TablaContenedor)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Título, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Título1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TxtResultados, javax.swing.GroupLayout.DEFAULT_SIZE, 9, Short.MAX_VALUE)))))
+                        .addComponent(Título, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Título1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TxtResultados, javax.swing.GroupLayout.DEFAULT_SIZE, 9, Short.MAX_VALUE)))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -233,7 +238,8 @@ public class VerTipoPersonas extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnCrear)
                     .addComponent(BtnEliminar)
-                    .addComponent(BtnVolver))
+                    .addComponent(BtnVerTiposPersonas)
+                    .addComponent(BtnVerTiposPersonas1))
                 .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -243,45 +249,47 @@ public class VerTipoPersonas extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Debes seleccionar una línea, verifica de nuevo", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             DefaultTableModel model = (DefaultTableModel)Tabla.getModel();
-            TipoPersonas.remove(idColumna);
+            Movimientos.remove(idColumna);
             try {
-                CSVWriter destino = new CSVWriter(new FileWriter("tipopersonas.csv", false));
-                for (TipoPersona tipo : TipoPersonas) {
+                CSVWriter destino = new CSVWriter(new FileWriter("movimientos.csv", false));
+                for (Movimiento tipo : Movimientos) {
                     String[] datos = tipo.getArray();
                     destino.writeNext(datos);
                 }
                 
                 destino.close();
                 
-                JOptionPane.showMessageDialog(null, "El tipo de persona se ha eliminado exitosamente");
+                JOptionPane.showMessageDialog(null, "El crédito se ha eliminado exitosamente");
 
-                refrescaVista(new VerTipoPersonas(), "", "");
+                refrescaVista(new VerMovimientos(), "", "");
             } catch (IOException ex) {
-                Logger.getLogger(VerTipoPersonas.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(VerMovimientos.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCrearActionPerformed
-        refrescaVista(new CrearTipoPersona(), "", "");
+        refrescaVista(new CrearMovimiento(), "", "");
     }//GEN-LAST:event_BtnCrearActionPerformed
 
-    private void BtnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVolverActionPerformed
-        refrescaVista(new VerPersonas(), "", "");
-    }//GEN-LAST:event_BtnVolverActionPerformed
-
-    private void TablaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_TablaPropertyChange
-    }//GEN-LAST:event_TablaPropertyChange
+    private void BtnVerTiposPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVerTiposPersonasActionPerformed
+        refrescaVista(new VerMovimientosCrédito(), "", "");
+    }//GEN-LAST:event_BtnVerTiposPersonasActionPerformed
 
     private void TablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMouseClicked
         this.idColumna = Tabla.getSelectedRow();
     }//GEN-LAST:event_TablaMouseClicked
 
+    private void BtnVerTiposPersonas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVerTiposPersonas1ActionPerformed
+        refrescaVista(new VerMovimientosDébito(), "", "");
+    }//GEN-LAST:event_BtnVerTiposPersonas1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCrear;
     private javax.swing.JButton BtnEliminar;
-    private javax.swing.JButton BtnVolver;
+    private javax.swing.JButton BtnVerTiposPersonas;
+    private javax.swing.JButton BtnVerTiposPersonas1;
     private javax.swing.JTable Tabla;
     private javax.swing.JScrollPane TablaContenedor;
     private javax.swing.JLabel TxtResultados;

@@ -21,6 +21,7 @@ import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
 import cooperativa.objetos.TipoPersona;
 import static cooperativa.principal.Base.cuerpoContenedor;
+import static cooperativa.principal.Base.refrescaVista;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -257,14 +258,7 @@ public class CrearTipoPersona extends javax.swing.JPanel {
                 
                 JOptionPane.showMessageDialog(null, "El tipo de persona se ha guardado exitosamente");
                 
-                VerTipoPersonas vista = new VerTipoPersonas();
-                vista.setSize(710, 580);
-                vista.setLocation(0, 0);
-                
-                cuerpoContenedor.removeAll();
-                cuerpoContenedor.add(vista);
-                cuerpoContenedor.revalidate();
-                cuerpoContenedor.repaint();
+                refrescaVista(new VerTipoPersonas(), "", "");
                 
             } catch (IOException ex) {
                 Logger.getLogger(CrearTipoPersona.class.getName()).log(Level.SEVERE, null, ex);
@@ -273,14 +267,7 @@ public class CrearTipoPersona extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        VerTipoPersonas vista = new VerTipoPersonas();
-        vista.setSize(710, 580);
-        vista.setLocation(0, 0);
-
-        cuerpoContenedor.removeAll();
-        cuerpoContenedor.add(vista);
-        cuerpoContenedor.revalidate();
-        cuerpoContenedor.repaint();
+        refrescaVista(new VerTipoPersonas(), "", "");
     }//GEN-LAST:event_btnCancelarActionPerformed
 
 

@@ -15,19 +15,87 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package cooperativa.vistas;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvValidationException;
+import cooperativa.objetos.Persona;
+import cooperativa.objetos.TipoPersona;
 import static cooperativa.principal.Base.cuerpoContenedor;
+import static cooperativa.principal.Base.refrescaVista;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author marin
  */
 public class VerPersonas extends javax.swing.JPanel {
+    
+    private int idColumna = -1;
+    private ArrayList<Persona> Personas = new ArrayList();
+    private int lineas = 0;
 
     /**
      * Creates new form Inicio
      */
     public VerPersonas() {
-        initComponents();
+        try {
+            initComponents();
+            
+            CSVReader origen = new CSVReader(new FileReader("personas.csv"));
+            String[] linea = null;
+            
+            while((linea = origen.readNext()) != null) {
+                lineas++;
+                Personas.add(new Persona(Integer.parseInt(linea[0]), linea[1], linea[2], linea[3], linea[4], linea[5], linea[6], linea[7]));
+            }
+            
+            origen.close();
+            TxtResultados.setText(String.valueOf(lineas));
+            
+            String list[][] = new String[lineas][8];
+            
+            for (int i = 0; i < Personas.size(); i++){
+                
+                list[i][0] = String.valueOf(Personas.get(i).getIdPersona());
+                list[i][1] = Personas.get(i).getIdTipoUsuario();
+                list[i][2] = Personas.get(i).getNombrePersona();
+                list[i][3] = Personas.get(i).getDireccion();
+                list[i][4] = Personas.get(i).getTel();
+                list[i][5] = Personas.get(i).getCel();
+                list[i][6] = Personas.get(i).getMail();
+                switch(Personas.get(i).getStatus()) {
+                    case "0":
+                        list[i][7] = "Inactivo (0)";
+                        break;
+                    case "1":
+                        list[i][7] = "Revisión (1)";
+                        break;
+                    case "2":
+                        list[i][7] = "Activo (2)";
+                        break;
+                    case "3":
+                        list[i][7] = "Bloqueado (3)";
+                        break;
+                }
+            }
+            
+            Tabla.setModel(new javax.swing.table.DefaultTableModel(list, new String [] {
+                "idPersona", "idTipoPersona", "nombrePersona", "Direccion", "NumeroTel", "NumeroCel", "Mail", "status"})
+            );
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(VerPersonas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException | CsvValidationException ex) {
+            Logger.getLogger(VerPersonas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -41,7 +109,7 @@ public class VerPersonas extends javax.swing.JPanel {
 
         Título = new javax.swing.JLabel();
         Título1 = new javax.swing.JLabel();
-        Título2 = new javax.swing.JLabel();
+        TxtResultados = new javax.swing.JLabel();
         TablaContenedor = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
         BtnCrear = new javax.swing.JButton();
@@ -59,8 +127,8 @@ public class VerPersonas extends javax.swing.JPanel {
         Título1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Título1.setText("Resultados");
 
-        Título2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Título2.setText("0");
+        TxtResultados.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        TxtResultados.setText("0");
 
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,6 +151,11 @@ public class VerPersonas extends javax.swing.JPanel {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        Tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaMouseClicked(evt);
             }
         });
         TablaContenedor.setViewportView(Tabla);
@@ -137,7 +210,7 @@ public class VerPersonas extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Título1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Título2, javax.swing.GroupLayout.DEFAULT_SIZE, 9, Short.MAX_VALUE)))
+                        .addComponent(TxtResultados, javax.swing.GroupLayout.DEFAULT_SIZE, 9, Short.MAX_VALUE)))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -150,7 +223,7 @@ public class VerPersonas extends javax.swing.JPanel {
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(Título1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Título2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(TxtResultados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(12, 12, 12)
                 .addComponent(TablaContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -163,29 +236,41 @@ public class VerPersonas extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
+        if(this.idColumna == -1) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar una línea, verifica de nuevo", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            DefaultTableModel model = (DefaultTableModel)Tabla.getModel();
+            Personas.remove(idColumna);
+            try {
+                CSVWriter destino = new CSVWriter(new FileWriter("personas.csv", false));
+                for (Persona tipo : Personas) {
+                    String[] datos = tipo.getArray();
+                    destino.writeNext(datos);
+                }
+                
+                destino.close();
+                
+                JOptionPane.showMessageDialog(null, "El tipo de persona se ha eliminado exitosamente");
+
+                refrescaVista(new VerPersonas(), "", "");
+
+            } catch (IOException ex) {
+                Logger.getLogger(VerPersonas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCrearActionPerformed
-        CrearPersona vista = new CrearPersona();
-        vista.setSize(710, 580);
-        vista.setLocation(0, 0);
-        
-        cuerpoContenedor.removeAll();
-        cuerpoContenedor.add(vista);
-        cuerpoContenedor.revalidate();
-        cuerpoContenedor.repaint();
+        refrescaVista(new CrearPersona(), "", "");
     }//GEN-LAST:event_BtnCrearActionPerformed
 
     private void BtnVerTiposPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVerTiposPersonasActionPerformed
-        VerTipoPersonas vista = new VerTipoPersonas();
-        vista.setSize(710, 580);
-        vista.setLocation(0, 0);
-        
-        cuerpoContenedor.removeAll();
-        cuerpoContenedor.add(vista);
-        cuerpoContenedor.revalidate();
-        cuerpoContenedor.repaint();
+        refrescaVista(new VerTipoPersonas(), "", "");
     }//GEN-LAST:event_BtnVerTiposPersonasActionPerformed
+
+    private void TablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMouseClicked
+        this.idColumna = Tabla.getSelectedRow();
+    }//GEN-LAST:event_TablaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -194,8 +279,8 @@ public class VerPersonas extends javax.swing.JPanel {
     private javax.swing.JButton BtnVerTiposPersonas;
     private javax.swing.JTable Tabla;
     private javax.swing.JScrollPane TablaContenedor;
+    private javax.swing.JLabel TxtResultados;
     private javax.swing.JLabel Título;
     private javax.swing.JLabel Título1;
-    private javax.swing.JLabel Título2;
     // End of variables declaration//GEN-END:variables
 }

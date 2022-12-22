@@ -32,55 +32,73 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractButton;
 import javax.swing.JOptionPane;
-
+import java.time.LocalDateTime;  
+import java.time.format.DateTimeFormatter;  
 /**
  *
  * @author marin
  */
-public class CrearPersona extends javax.swing.JPanel {
+public class CrearMovimiento extends javax.swing.JPanel {
     
     private int lastId = -1;
-    private ArrayList<TipoPersona> TipoPersonas = new ArrayList();
+    private ArrayList<Concepto> Conceptos = new ArrayList();
     private ArrayList<Persona> Personas = new ArrayList();
+    private ArrayList<Movimiento> Movimientos = new ArrayList();
     
     /**
      * Creates new form Inicio
      */
-    public CrearPersona() {
+    public CrearMovimiento() {
         
         initComponents();
         
-        CSVReader origenTipoPersonas, origenPersonas;
+        FechaVal.setText(java.time.LocalDate.now().toString());
+        
+        CSVReader origenConceptos, origenPersona, origenMovimientos;
         
         try {
-            origenTipoPersonas = new CSVReader(new FileReader("tipopersonas.csv"));
+            origenPersona = new CSVReader(new FileReader("personas.csv"));
             String[] linea = null;
             try {
-                while ((linea = origenTipoPersonas.readNext()) != null) {
-                    comboIdTipoPersona.addItem(linea[1]);
+                while ((linea = origenPersona.readNext()) != null) {
+                    comboIdPersona.addItem(linea[0]);
                 }
             } catch (IOException | CsvValidationException ex) {
-                Logger.getLogger(CrearPersona.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CrearMovimiento.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(CrearPersona.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CrearMovimiento.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         try {
-            origenPersonas = new CSVReader(new FileReader("personas.csv"));
+            origenConceptos = new CSVReader(new FileReader("conceptos.csv"));
             String[] linea = null;
             try {
-                while ((linea = origenPersonas.readNext()) != null) {
-                    Personas.add(new Persona(Integer.parseInt(linea[0]), linea[1], linea[2], linea[3], linea[4], linea[5], linea[6], linea[7]));
+                while ((linea = origenConceptos.readNext()) != null) {
+                    comboIdConcepto.addItem(linea[0]);
                 }
             } catch (IOException | CsvValidationException ex) {
-                Logger.getLogger(CrearPersona.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CrearMovimiento.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(CrearPersona.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CrearMovimiento.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        for (Persona tipo : Personas) {
+        try {
+            origenMovimientos = new CSVReader(new FileReader("movimientos.csv"));
+            String[] linea = null;
+            try {
+                while ((linea = origenMovimientos.readNext()) != null) {
+                    Movimientos.add(new Movimiento(Integer.parseInt(linea[0]), linea[1], Integer.parseInt(linea[2]), Integer.parseInt(linea[3]), linea[4], Double.parseDouble(linea[5]), linea[6]));
+                }
+            } catch (IOException | CsvValidationException ex) {
+                Logger.getLogger(CrearMovimiento.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(CrearMovimiento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for (Movimiento tipo : Movimientos) {
             if(lastId < tipo.getIdPersona()) {
                 lastId = tipo.getIdPersona();
             }
@@ -98,23 +116,21 @@ public class CrearPersona extends javax.swing.JPanel {
 
         grupoRadio = new javax.swing.ButtonGroup();
         Panel = new javax.swing.JPanel();
-        idTipoPersona = new javax.swing.JLabel();
+        idPersona = new javax.swing.JLabel();
         status = new javax.swing.JLabel();
         statusVal = new javax.swing.JRadioButton();
         statusVal1 = new javax.swing.JRadioButton();
         statusVal2 = new javax.swing.JRadioButton();
         statusVal3 = new javax.swing.JRadioButton();
-        comboIdTipoPersona = new javax.swing.JComboBox<>();
-        NombrePersonaVal = new javax.swing.JTextField();
-        NombrePersona = new javax.swing.JLabel();
-        DireccionVal = new javax.swing.JTextField();
-        Direccion = new javax.swing.JLabel();
-        NumeroTel = new javax.swing.JLabel();
-        NumeroTelVal = new javax.swing.JTextField();
-        NumeroCelVal = new javax.swing.JTextField();
-        NumeroCel = new javax.swing.JLabel();
-        MailVal = new javax.swing.JTextField();
-        Mail = new javax.swing.JLabel();
+        comboIdPersona = new javax.swing.JComboBox<>();
+        DetalleVal = new javax.swing.JTextField();
+        Detalle = new javax.swing.JLabel();
+        Importe = new javax.swing.JLabel();
+        ImporteVal = new javax.swing.JTextField();
+        FechaVal = new javax.swing.JTextField();
+        Fecha = new javax.swing.JLabel();
+        idConcepto = new javax.swing.JLabel();
+        comboIdConcepto = new javax.swing.JComboBox<>();
         Título = new javax.swing.JLabel();
         btnCrear = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -124,7 +140,7 @@ public class CrearPersona extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(710, 580));
         setPreferredSize(new java.awt.Dimension(710, 580));
 
-        idTipoPersona.setText("Tipo de persona");
+        idPersona.setText("Persona");
 
         status.setText("Estado");
 
@@ -155,87 +171,86 @@ public class CrearPersona extends javax.swing.JPanel {
         statusVal3.setText("Bloqueado");
         statusVal3.setActionCommand("3");
 
-        comboIdTipoPersona.addActionListener(new java.awt.event.ActionListener() {
+        comboIdPersona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboIdTipoPersonaActionPerformed(evt);
+                comboIdPersonaActionPerformed(evt);
             }
         });
 
-        NombrePersona.setText("Nombre de la persona");
+        Detalle.setText("Detalle");
 
-        Direccion.setText("Dirección");
+        Importe.setText("Importe");
 
-        NumeroTel.setText("Tel.");
+        Fecha.setText("Fecha");
 
-        NumeroCel.setText("Cel.");
+        idConcepto.setText("Concepto");
 
-        Mail.setText("Correo electrónico");
+        comboIdConcepto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboIdConceptoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
         Panel.setLayout(PanelLayout);
         PanelLayout.setHorizontalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(23, 23, 23)
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelLayout.createSequentialGroup()
-                        .addComponent(Mail)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
                         .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(MailVal, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(NumeroTelVal, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(NumeroCelVal, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(NombrePersonaVal, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboIdTipoPersona, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(DireccionVal, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Importe, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(idPersona, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(status, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelLayout.createSequentialGroup()
-                                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(NumeroTel, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(NumeroCel, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(NombrePersona, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(idTipoPersona, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(status, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelLayout.createSequentialGroup()
-                                        .addComponent(statusVal)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(statusVal1)
-                                        .addGap(12, 12, 12)
-                                        .addComponent(statusVal2)
-                                        .addGap(12, 12, 12)
-                                        .addComponent(statusVal3))
-                                    .addComponent(Direccion, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(20, 20, 20))))
+                                .addComponent(statusVal)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(statusVal1)
+                                .addGap(12, 12, 12)
+                                .addComponent(statusVal2)
+                                .addGap(12, 12, 12)
+                                .addComponent(statusVal3))
+                            .addComponent(Detalle, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(PanelLayout.createSequentialGroup()
+                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(FechaVal, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ImporteVal, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboIdPersona, javax.swing.GroupLayout.Alignment.LEADING, 0, 630, Short.MAX_VALUE)
+                            .addComponent(DetalleVal, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboIdConcepto, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(17, 17, 17))
+                    .addGroup(PanelLayout.createSequentialGroup()
+                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(idConcepto)
+                            .addComponent(Fecha))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         PanelLayout.setVerticalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(idTipoPersona)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(Fecha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comboIdTipoPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(FechaVal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(NombrePersona)
+                .addComponent(idPersona)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(NombrePersonaVal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(comboIdPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Direccion)
+                .addComponent(idConcepto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DireccionVal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(comboIdConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(NumeroTel)
+                .addComponent(Detalle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(NumeroTelVal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(DetalleVal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(NumeroCel)
+                .addComponent(Importe)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(NumeroCelVal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Mail)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(MailVal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ImporteVal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(status)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -243,13 +258,13 @@ public class CrearPersona extends javax.swing.JPanel {
                     .addComponent(statusVal1)
                     .addComponent(statusVal2)
                     .addComponent(statusVal3))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         Título.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        Título.setText("Crear persona");
+        Título.setText("Crear movimiento");
 
-        btnCrear.setText("Crear persona");
+        btnCrear.setText("Crear movimiento");
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearActionPerformed(evt);
@@ -275,7 +290,7 @@ public class CrearPersona extends javax.swing.JPanel {
                             .addComponent(Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(Título, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 273, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnCancelar))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -291,7 +306,7 @@ public class CrearPersona extends javax.swing.JPanel {
                     .addComponent(Título))
                 .addGap(11, 11, 11)
                 .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
                 .addComponent(btnCrear)
                 .addGap(20, 20, 20))
         );
@@ -305,11 +320,12 @@ public class CrearPersona extends javax.swing.JPanel {
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         
-        if(comboIdTipoPersona.getModel().getSelectedItem().equals("") || NombrePersonaVal.getText().equals("") || DireccionVal.getText().equals("") || NumeroTelVal.getText().equals("") ||  NumeroCelVal.getText().equals("") || MailVal.getText().equals("")) {
+        if(comboIdPersona.getModel().getSelectedItem().equals("") || DetalleVal.getText().equals("") || ImporteVal.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Uno de los campos se encuentra vacío, verifica de nuevo", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             String statusId = "";
-            String idTipoUsuario = (String)comboIdTipoPersona.getSelectedItem();
+            String idPersona = (String)comboIdPersona.getSelectedItem();
+            String idConcepto = (String)comboIdConcepto.getSelectedItem();
             
             for (Enumeration<AbstractButton> buttons = grupoRadio.getElements(); buttons.hasMoreElements();) {
                 AbstractButton button = buttons.nextElement();
@@ -318,55 +334,57 @@ public class CrearPersona extends javax.swing.JPanel {
                 }
             }
             
-            Personas.add(new Persona(lastId + 1, idTipoUsuario, NombrePersonaVal.getText(), DireccionVal.getText(), NumeroTelVal.getText(), NumeroCelVal.getText(), MailVal.getText(), statusId));
+            Movimientos.add(new Movimiento(lastId + 1, FechaVal.getText(), Integer.parseInt(idPersona), Integer.parseInt(idConcepto), DetalleVal.getText(), Double.parseDouble(ImporteVal.getText()), statusId));
             
             try {
-                CSVWriter destino = new CSVWriter(new FileWriter("personas.csv", false));
+                CSVWriter destino = new CSVWriter(new FileWriter("movimientos.csv", false));
                 
-                for (Persona tipo : Personas) {
+                for (Movimiento tipo : Movimientos) {
                     String [] datos = tipo.getArray();
                     destino.writeNext(datos);
                 }
                 
                 destino.close();
                 
-                JOptionPane.showMessageDialog(null, "La persona se ha guardado exitosamente");
+                JOptionPane.showMessageDialog(null, "El movimiento se ha guardado exitosamente");
                 
-                refrescaVista(new VerPersonas(), "", "");
+                refrescaVista(new VerMovimientos(), "", "");
                 
             } catch (IOException ex) {
-                Logger.getLogger(CrearPersona.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CrearMovimiento.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        refrescaVista(new VerPersonas(), "", "");
+        refrescaVista(new VerMovimientos(), "", "");
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void comboIdTipoPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboIdTipoPersonaActionPerformed
+    private void comboIdPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboIdPersonaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_comboIdTipoPersonaActionPerformed
+    }//GEN-LAST:event_comboIdPersonaActionPerformed
+
+    private void comboIdConceptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboIdConceptoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboIdConceptoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Direccion;
-    private javax.swing.JTextField DireccionVal;
-    private javax.swing.JLabel Mail;
-    private javax.swing.JTextField MailVal;
-    private javax.swing.JLabel NombrePersona;
-    private javax.swing.JTextField NombrePersonaVal;
-    private javax.swing.JLabel NumeroCel;
-    private javax.swing.JTextField NumeroCelVal;
-    private javax.swing.JLabel NumeroTel;
-    private javax.swing.JTextField NumeroTelVal;
+    private javax.swing.JLabel Detalle;
+    private javax.swing.JTextField DetalleVal;
+    private javax.swing.JLabel Fecha;
+    private javax.swing.JTextField FechaVal;
+    private javax.swing.JLabel Importe;
+    private javax.swing.JTextField ImporteVal;
     private javax.swing.JPanel Panel;
     private javax.swing.JLabel Título;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCrear;
-    private javax.swing.JComboBox<String> comboIdTipoPersona;
+    private javax.swing.JComboBox<String> comboIdConcepto;
+    private javax.swing.JComboBox<String> comboIdPersona;
     private javax.swing.ButtonGroup grupoRadio;
-    private javax.swing.JLabel idTipoPersona;
+    private javax.swing.JLabel idConcepto;
+    private javax.swing.JLabel idPersona;
     private javax.swing.JLabel status;
     private javax.swing.JRadioButton statusVal;
     private javax.swing.JRadioButton statusVal1;
