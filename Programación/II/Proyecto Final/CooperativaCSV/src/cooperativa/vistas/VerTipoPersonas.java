@@ -269,7 +269,7 @@ public class VerTipoPersonas extends javax.swing.JPanel {
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCrearActionPerformed
-        CrearTipoPersonas vista = new CrearTipoPersonas();
+        CrearTipoPersona vista = new CrearTipoPersona();
         vista.setSize(710, 580);
         vista.setLocation(0, 0);
         

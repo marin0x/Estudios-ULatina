@@ -36,9 +36,20 @@ public class Base extends javax.swing.JFrame implements MouseListener {
         encabezadoTítulo.setText("Inicio");
         encabezadoDescripción.setText("Gestione todo con un solo clic");
         
-        File f = new File("tipopersonas.csv");
-        if(!f.exists()) {
+        File ArctipoPersonas = new File("tipopersonas.csv");
+        if(!ArctipoPersonas.exists()) {
             File tipoPersonasCSV = new File("tipopersonas.csv");
+            try {
+                if (tipoPersonasCSV.createNewFile()) {
+                    System.out.println("Archivo generado por seguridad: " + tipoPersonasCSV.getName());
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(Base.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        File ArcPersonas = new File("personas.csv");
+        if(!ArcPersonas.exists()) {
+            File tipoPersonasCSV = new File("personas.csv");
             try {
                 if (tipoPersonasCSV.createNewFile()) {
                     System.out.println("Archivo generado por seguridad: " + tipoPersonasCSV.getName());

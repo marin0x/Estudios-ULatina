@@ -36,7 +36,7 @@ import javax.swing.JOptionPane;
  *
  * @author marin
  */
-public class CrearTipoPersonas extends javax.swing.JPanel {
+public class CrearTipoPersona extends javax.swing.JPanel {
     
     private int lastId = -1;
     private ArrayList<TipoPersona> TipoPersonas = new ArrayList();
@@ -44,7 +44,7 @@ public class CrearTipoPersonas extends javax.swing.JPanel {
     /**
      * Creates new form Inicio
      */
-    public CrearTipoPersonas() {
+    public CrearTipoPersona() {
         
         initComponents();
         
@@ -58,10 +58,10 @@ public class CrearTipoPersonas extends javax.swing.JPanel {
                     TipoPersonas.add(new TipoPersona(Integer.parseInt(linea[0]), linea[1], linea[2]));
                 }
             } catch (IOException | CsvValidationException ex) {
-                Logger.getLogger(CrearTipoPersonas.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CrearTipoPersona.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(CrearTipoPersonas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CrearTipoPersona.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         for (TipoPersona tipo : TipoPersonas) {
@@ -82,10 +82,7 @@ public class CrearTipoPersonas extends javax.swing.JPanel {
     private void initComponents() {
 
         grupoRadio = new javax.swing.ButtonGroup();
-        Título = new javax.swing.JLabel();
-        BtnCrear = new javax.swing.JButton();
-        BtnEliminar = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        Panel = new javax.swing.JPanel();
         idTipoPersona = new javax.swing.JLabel();
         idTipoPersonaVal = new javax.swing.JTextField();
         status = new javax.swing.JLabel();
@@ -93,6 +90,7 @@ public class CrearTipoPersonas extends javax.swing.JPanel {
         statusVal1 = new javax.swing.JRadioButton();
         statusVal2 = new javax.swing.JRadioButton();
         statusVal3 = new javax.swing.JRadioButton();
+        Título = new javax.swing.JLabel();
         btnCrear = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
@@ -100,18 +98,6 @@ public class CrearTipoPersonas extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(710, 580));
         setMinimumSize(new java.awt.Dimension(710, 580));
         setPreferredSize(new java.awt.Dimension(710, 580));
-
-        Título.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        Título.setText("Crear tipo de persona");
-
-        BtnCrear.setText("Crear ");
-
-        BtnEliminar.setText("Eliminar");
-        BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnEliminarActionPerformed(evt);
-            }
-        });
 
         idTipoPersona.setText("Nombre del tipo de persona");
 
@@ -144,19 +130,19 @@ public class CrearTipoPersonas extends javax.swing.JPanel {
         statusVal3.setText("Bloqueado");
         statusVal3.setActionCommand("3");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
+        Panel.setLayout(PanelLayout);
+        PanelLayout.setHorizontalGroup(
+            PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(idTipoPersonaVal)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelLayout.createSequentialGroup()
+                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(idTipoPersona)
                             .addComponent(status)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(PanelLayout.createSequentialGroup()
                                 .addComponent(statusVal)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(statusVal1)
@@ -165,11 +151,11 @@ public class CrearTipoPersonas extends javax.swing.JPanel {
                                 .addGap(12, 12, 12)
                                 .addComponent(statusVal3)))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(20, 20, 20))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        PanelLayout.setVerticalGroup(
+            PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(idTipoPersona)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -177,13 +163,16 @@ public class CrearTipoPersonas extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(status)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(statusVal)
                     .addComponent(statusVal1)
                     .addComponent(statusVal2)
                     .addComponent(statusVal3))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
+
+        Título.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        Título.setText("Crear tipo de persona");
 
         btnCrear.setText("Crear tipo de persona");
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
@@ -208,12 +197,7 @@ public class CrearTipoPersonas extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(BtnEliminar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtnCrear))
+                            .addComponent(Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(Título, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 273, Short.MAX_VALUE)
@@ -231,19 +215,12 @@ public class CrearTipoPersonas extends javax.swing.JPanel {
                     .addComponent(btnCancelar)
                     .addComponent(Título))
                 .addGap(11, 11, 11)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 341, Short.MAX_VALUE)
                 .addComponent(btnCrear)
-                .addGap(434, 434, 434)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnCrear)
-                    .addComponent(BtnEliminar))
                 .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
-    }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void statusValActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusValActionPerformed
     }//GEN-LAST:event_statusValActionPerformed
@@ -290,7 +267,7 @@ public class CrearTipoPersonas extends javax.swing.JPanel {
                 cuerpoContenedor.repaint();
                 
             } catch (IOException ex) {
-                Logger.getLogger(CrearTipoPersonas.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CrearTipoPersona.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btnCrearActionPerformed
@@ -308,15 +285,13 @@ public class CrearTipoPersonas extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnCrear;
-    private javax.swing.JButton BtnEliminar;
+    private javax.swing.JPanel Panel;
     private javax.swing.JLabel Título;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCrear;
     private javax.swing.ButtonGroup grupoRadio;
     private javax.swing.JLabel idTipoPersona;
     private javax.swing.JTextField idTipoPersonaVal;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel status;
     private javax.swing.JRadioButton statusVal;
     private javax.swing.JRadioButton statusVal1;

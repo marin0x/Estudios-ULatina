@@ -166,7 +166,14 @@ public class VerPersonas extends javax.swing.JPanel {
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCrearActionPerformed
+        CrearPersona vista = new CrearPersona();
+        vista.setSize(710, 580);
+        vista.setLocation(0, 0);
         
+        cuerpoContenedor.removeAll();
+        cuerpoContenedor.add(vista);
+        cuerpoContenedor.revalidate();
+        cuerpoContenedor.repaint();
     }//GEN-LAST:event_BtnCrearActionPerformed
 
     private void BtnVerTiposPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVerTiposPersonasActionPerformed
