@@ -243,15 +243,12 @@ public class CrearTipoPersonas extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void statusValActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusValActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_statusValActionPerformed
 
     private void statusVal2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusVal2ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_statusVal2ActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed

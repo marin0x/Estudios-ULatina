@@ -163,7 +163,6 @@ public class VerPersonas extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCrearActionPerformed
