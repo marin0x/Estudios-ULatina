@@ -134,7 +134,7 @@ public class Base extends javax.swing.JFrame implements MouseListener {
 
         programaEncabezado.setFont(new java.awt.Font("Segoe UI", 1, 21)); // NOI18N
         programaEncabezado.setForeground(new java.awt.Color(255, 255, 255));
-        programaEncabezado.setText("Marín Vargas Valdez");
+        programaEncabezado.setText("G. Y. A");
 
         javax.swing.GroupLayout menuEncabezadoLayout = new javax.swing.GroupLayout(menuEncabezado);
         menuEncabezado.setLayout(menuEncabezadoLayout);
